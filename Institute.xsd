@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+         <!-- XML Schema Generated from XML Document on Wed May 01 2019 15:00:27 GMT+0500 (Pakistan Standard Time) -->
+         <!-- with XmlGrid.net Free Online Service http://xmlgrid.net -->
+        <xs:element name="Institute">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Student" maxOccurs="unbounded"/>   
+                <xs:element ref="Instructor" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Courses" maxOccurs="unbounded"/> 
+            </xs:sequence>          
+        </xs:complexType>
+        <xs:key name="PKStudents">
+            <xs:selector xpath="Student/StudentID"/>
+            <xs:field xpath="."/>
+        </xs:key>
+        <xs:key name="PKCourses">
+            <xs:selector xpath="Student/StudentID"/>
+            <xs:field xpath="."/>
+        </xs:key>
+        <xs:key name="PKInstructor">
+            <xs:selector xpath="Address/AddressID"/>
+            <xs:field xpath="."/>
+        </xs:key>
+        <xs:keyref name="FKCoursesToInstructor" refer="PKInstructor">
+            <xs:selector xpath="Courses/CourseInstructorId"/>
+
+            <xs:field xpath="."/>
+        </xs:keyref>
+    </xs:element>
+         <xs:element name="COURSES">
+               <xs:complexType>
+                     <xs:sequence>
+                           <xs:element name="COURSE" maxOccurs="unbounded">
+                                 <xs:complexType>
+                                       <xs:sequence>
+                                             <xs:element name="CourseName" type="xs:string"></xs:element>
+                                             <xs:element name="CreditHrs" type="xs:int"></xs:element>
+                                             <xs:element name="ContactHrs" type="xs:int"></xs:element>
+                                             <xs:element name="CourseInstructorId" type="xs:int"></xs:element>
+                                       </xs:sequence>
+                                       <xs:attribute name="COURSEID" type="xs:int"></xs:attribute>
+                                 </xs:complexType>
+                           </xs:element>
+                     </xs:sequence>
+               </xs:complexType>
+         </xs:element>
+
+         <xs:element name="Instructors">
+               <xs:complexType>
+                     <xs:sequence>
+                           <xs:element name="Instructor" maxOccurs="unbounded">
+                                 <xs:complexType>
+                                       <xs:sequence>
+                                             <xs:element name="InstructorId" type="xs:int"></xs:element>
+                                             <xs:element name="FirstName" type="xs:string"></xs:element>
+                                             <xs:element name="MiddleName"></xs:element>
+                                             <xs:element name="LastName" type="xs:string"></xs:element>
+                                             <xs:element name="Designation" type="xs:string"></xs:element>
+                                       </xs:sequence>
+                                 </xs:complexType>
+                           </xs:element>
+                     </xs:sequence>
+               </xs:complexType>
+         </xs:element>
+
+         <xs:element name="Students">
+               <xs:complexType>
+                     <xs:sequence>
+                           <xs:element name="Student" maxOccurs="unbounded">
+                                 <xs:complexType>
+                                       <xs:sequence>
+                                             <xs:element name="RegisterationNumber" type="xs:string"></xs:element>
+                                             <xs:element name="FirstName" type="xs:string"></xs:element>
+                                             <xs:element name="MiddleName" type="xs:string"></xs:element>
+                                             <xs:element name="LastName" type="xs:string"></xs:element>
+                                             <xs:element name="Address" type="xs:string"></xs:element>
+                                             <xs:element name="GPA" type="xs:double"></xs:element>
+                                       </xs:sequence>
+                                 </xs:complexType>
+                           </xs:element>
+                     </xs:sequence>
+               </xs:complexType>
+         </xs:element>
+   </xs:schema>
